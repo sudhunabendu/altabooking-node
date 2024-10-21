@@ -1,8 +1,8 @@
-const { authRegistrationValidate } = require("../../../utils/userValidation");
-const User = require("../../Models/users.model")
-const UserDetail = require("../../Models/userDetails.model");
+const { authRegistrationValidate } = require("../../utils/userValidation");
+const User = require("../../app/Models/users.model")
+const UserDetail = require("../../app/Models/userDetails.model");
 const mongoose = require('mongoose');
-const dbHelpers = require('../../../libraries/dbHelpers');
+const dbHelpers = require('../../libraries/dbHelpers');
 
 class AuthController {
     constructor() { }

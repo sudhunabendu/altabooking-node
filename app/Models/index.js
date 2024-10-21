@@ -11,7 +11,8 @@ db.ab_user_details = require("./userDetails.model");
 db.ab_user_codes = require("./userCode.model")
 
 
-mongoose.connect(`mongodb://127.0.0.1:27017/altabooking-node`, {
+mongoose.connect(`mongodb+srv://sudhunabendu:2Aly1bLp41VaIVPs@cluster0.fwvqxqi.mongodb.net/altabookingTest`, {
+// mongoose.connect(`mongodb://127.0.0.1:27017/altabooking-node`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
