@@ -37,6 +37,11 @@ class AuthController {
         }
     }
 
+
+    async login(req, res){
+        return res.success({data:"ok login"});
+    }
+
     async forgotPasswordByEmail(req, res) {
         const validationError = customerValidate.emailRequestValidate(req.body);
         if (validationError) return res.error({ message: validationError });
