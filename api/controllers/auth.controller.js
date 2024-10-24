@@ -38,8 +38,26 @@ class AuthController {
     }
 
 
-    async login(req, res){
-        return res.success({data:"ok login"});
+    async login(req, res) {
+        const validationError = validateRequest.loginSchema(req.body);
+        if (validationError) return res.error({ message: validationError });
+        try {
+            const user = await userRepository.getUserByEmailPassword(req.body);
+            if (!user) return res.error({ message: 'Invalid Email / Password' });
+            const accountStatus = authHelper.checkAccountStatus(user);
+            if (accountStatus.error) return res.error({ message: accountStatus.error });
+            const token = authHelper.generateToken(user);
+            await userRepository.saveToken({ user, token });
+            // const userData = await userRepository.getUserDetailByUserId(user._id)
+            const responseData = authHelper.generateLoginResponse({ user: user.toObject(), token });
+            // const responseData = authHelper.generateLoginResponse({ user: user.toObject(), userData, token });
+            // const legacyLogin = await authHelper.legacyLogin({ request_data: req.request_data });
+            return res.success({ data: { nodeLogin: responseData }, message: 'You have successfully login' });
+
+        } catch (error) {
+            res.exception({moduleName,error});
+        }
+        // return res.success({data:"ok login"});
     }
 
     async forgotPasswordByEmail(req, res) {

@@ -1,7 +1,33 @@
 const User = require('../models/users.model');
 const UserDetail = require('../models/userDetails.model');
+const Token = require('../models/token.model');
 
 class userRepository {
+
+    async getUserByEmailPassword({ email, password }) {
+        try {
+            let user = await User.findOne({ email: email });
+            if (!user || !(await user.isPasswordMatch(password))) {
+                return null;
+            }
+            return user;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+
+    async getUserDetailByUserId(payload) {
+        try {
+            let data = await UserDetail.findOne({ user_id: payload }).populate({ path: 'currency_id', model: "Currency" });
+            if (!data) {
+                return null;
+            }
+            return data;
+        } catch (e) {
+            throw e;
+        }
+    }
 
     async checkEmailExists(payload) {
         const user = await User.findOne({ email: payload.email });
@@ -50,6 +76,18 @@ class userRepository {
             return user;
         } else {
             return false;
+        }
+    }
+
+    async saveToken(payload) {
+        try {
+            let data = await Token.create({ user: payload.user.id, token: payload.token });
+            if (!data) {
+                return null;
+            }
+            return data;
+        } catch (e) {
+            throw e;
         }
     }
 }

@@ -13,6 +13,42 @@ exports.generateUniqueUserCode = async (length, available_sets) => {
     }
 }
 
+exports.generateLoginResponse = (payload) => {
+    payload.user.id = payload.user._id;
+    delete payload.user._id;
+    return responseData = {
+        profile: {
+            ...payload.user,
+            token: payload.token,
+            token_type: 'Bearer',
+            profile_image: '',
+        },
+        // currency_info: {
+        //     currency_id: payload.userData.currency_id.id,
+        //     currency_code: payload.userData.currency_id.code,
+        //     currency_symbol: payload.userData.currency_id.symbol
+        // },
+        priority_list: {}
+    };
+}
+
+
+exports.checkAccountStatus = (user) => {
+    if (user.status == 'Expired') {
+        return { error: 'Your account has expired, please contact Admin at info@altabooking.com' }
+    }
+    if (user.status == 'Blocked') {
+        return { error: 'Your account has blocked, please contact Admin at info@altabooking.com' }
+    }
+    if (user.status == 'Inactive') {
+        return { error: 'Email is not verified' }
+    }
+    if (!user.mobile_number_verified) {
+        return { error: 'Phone number is not verified' }
+    }
+    return {}
+}
+
 exports.generateCode = (length, available_sets = 'luds') => {
     const lower = 'abcdefghijklmnopqrstuvwxyz';
     const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
