@@ -15,10 +15,10 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-// app.use(require("./utils/responseHandler"))
+app.use(require("./utils/responseHandler"))
 // app.use(express.static(path.join(__dirname, 'storage')))
 
-// global.config=require('./config/config')
+global.config=require('./config/config')
 // global.validateRequest=require("./utils/validateRequest");
 
 // global.cache = new NodeCache({ stdTTL: 500, checkperiod: 180 });

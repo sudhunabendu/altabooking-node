@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs');
+const UserDetail=require("./userDetails.model")
 
 const userSchema = mongoose.Schema({
-  role_id: { type: mongoose.Schema.Types.ObjectId, ref: 'ab_roles', default: '665d529d6caaa43c454087de', index: { unique: false, name: "userRole" } },
+  role_id: { type: mongoose.Schema.Types.ObjectId, ref: 'ab_roles', default: '671a006cd736ff3adbbe4bed', index: { unique: false, name: "userRole" } },
   title: { type: String },
   gender: { type: String, enum: ['Male', 'Female', 'Other'], default: 'Male' },
   first_name: { type: String, index: { unique: false, name: "userFirstName" } },
