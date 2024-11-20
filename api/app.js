@@ -23,7 +23,7 @@ global.config=require('./config/config')
 
 // global.cache = new NodeCache({ stdTTL: 500, checkperiod: 180 });
 
-app.get("/", (_, response) => { response.json({ message: "Welcome to Alta Booking app" }); });
+app.get("/", (_, response) => { response.json({ message: "Welcome to NodeJS app" }); });
 app.use('/api/v1/', require('./routes/api'));
 // app.use('/cron/', require('./routes/cron'));
 

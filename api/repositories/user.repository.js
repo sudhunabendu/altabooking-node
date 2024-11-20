@@ -62,9 +62,7 @@ class userRepository {
     async saveRegistrationData(payload){
         const user = new User({ ...payload, mobile_code: payload.dial_code });
         await user.save();
-        // await user.save({ session });
         return { user };
-        // return { user, userDetails };
     }
 
     async userCheckEmail(payload) {
