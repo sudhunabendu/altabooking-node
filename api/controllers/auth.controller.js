@@ -37,7 +37,6 @@ class AuthController {
         }
     }
 
-
     async login(req, res) {
         const validationError = validateRequest.loginSchema(req.body);
         if (validationError) return res.error({ message: validationError });
