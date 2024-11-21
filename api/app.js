@@ -20,7 +20,7 @@ app.use(require("./utils/responseHandler"))
 
 global.config=require('./config/config')
 // global.validateRequest=require("./utils/validateRequest");
-
+global.loggedInUserId=''
 // global.cache = new NodeCache({ stdTTL: 500, checkperiod: 180 });
 
 app.get("/", (_, response) => { response.json({ message: "Welcome to NodeJS app" }); });
