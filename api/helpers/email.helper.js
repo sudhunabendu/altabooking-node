@@ -60,7 +60,6 @@ class EmailHelpers {
         }
     }
 
-
     static async generatePdfFromHtml(htmlContent) {
 
         const browser = await puppeteer.launch({
@@ -76,7 +75,6 @@ class EmailHelpers {
         await browser.close();
         return pdfBuffer;
     }
-
 
     async sendEmailNotification(emailData, toEmail, toName, subject, attachment = '', attachment2 = '') {
         if (!emailData || !toEmail || !toName || !subject) {
@@ -225,7 +223,6 @@ class EmailHelpers {
             throw error; // Rethrow to handle in calling function if needed
         }
     }
-
 
     static async generateEmailHtml(emailBody, adminEmail, emailSignature) {
         return `<!doctype html>
